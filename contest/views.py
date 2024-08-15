@@ -13,16 +13,24 @@ class ContestView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-        return self.render_to_response({'form': form})
+        participants = Participant.objects.all().order_by('-id')
+        return self.render_to_response({
+            'form': form,
+            'participants': participants,
+            })
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
             participants = Participant.objects.all().order_by('-id')
+            form = self.form_class()
             return self.render_to_response({
                 'form': form,
                 'participants': participants,
                 'message':'Спасибо за участие!'})
-        # else:
-        #     return self.render_to_response({'form': form})
+        else:
+            return self.render_to_response({
+                'form': form,
+                'message':'Что-то пошло не так!'
+                })
