@@ -42,7 +42,6 @@
         <h2>Форма участника</h2>
 
         <div class='form-container'>
-          {% comment %} <form id="myForm" method="post"> {% endcomment %}
           <form method="post">
             {% csrf_token %}
             {{form.as_p}}
@@ -72,23 +71,5 @@
       </div>
     </div>
   </section>
-
-  {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script>
-      $(document).ready(function() {
-          $('#myForm').submit(function(event) {
-              event.preventDefault();
-              var formData = $(this).serialize();
-              $.ajax({
-                  type: 'POST',
-                  url: '{% url "contest" %}',
-                  data: formData,
-                  success: function(data) {
-                      $('#result').html(data);
-                  }
-              });
-          });
-      });
-  </script> {% endcomment %}
 </body>
 </html>
