@@ -19,16 +19,21 @@
 
       <div>
         <h2>Форма участника</h2>
-        
-        <p>Здесь должна быть форма</p>
+          <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">submit</button>
+            <p>{{ message }}</p>
+          </form>
       </div>
-  
+
       <div>
         <h2>Участники</h2>
-
-        <p>
-          Здесь должен быть список участников
-        </p>
+        {% for participant in participants %}
+          <h3>{{ participant.name }}</h3>
+          <p>{{ participant.email }}</p>
+          <p>{{ participant.code }}</p>
+        {% endfor %}
       </div>
     </div>
   </section>
